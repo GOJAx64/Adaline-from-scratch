@@ -1,0 +1,8 @@
+XL = -1.0
+XU = 1.0
+
+STEP = .028
+
+LEARNING_RATE = 0.3
+EPOCHS = 200
+EMPTY_CHAR = ''
