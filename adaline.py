@@ -14,19 +14,29 @@ class Adaline:
     def net(self, X):
         return np.dot(self.w, X) + self.b
 
-    def fitness(self, X, Y, epochs): #Change
-        done = False
+    def fitness(self, X, Y, epochs, min_error): #Change
         epoch = 0
         p = X.shape[1]
+        Error = 1
+        prev_error = 0
+        total_error = 0
+        Ew =  0
 
-        while(epoch < epochs):
+        while(Error > min_error and epoch < epochs):
+            prev_error = Ew
             for i in range(p):
                 error = Y[i] - self.net(X[:,i])
                 self.w += self.eta * error * X[:,i]
                 self.b += self.eta * error
+                total_error += error**2 
             epoch += 1
-            
-        self.converged = done
+            Ew = (1/p) * total_error
+            Error = Ew - prev_error
+        
+        if(Error < min_error):
+            self.converged = True 
+        else:
+            self.converged = False
         self.epochs = epoch
 
     def get_w(self):

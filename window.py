@@ -65,7 +65,7 @@ class Window:
 
     def fitAdaline(self, event):
         neuron = Adaline(self.X.shape[0], self.learning_rate)
-        neuron.fitness(self.X, self.Y, self.epochs)
+        neuron.fitness(self.X, self.Y, self.epochs, 0.3)
         if neuron.hasConverged():
             self.textbox_has_converged.set_val('Adaline has converged in ' + str(neuron.epochsReached()) + ' epochs')
         else:
